@@ -13,4 +13,20 @@ public class VaultKeepsController : ControllerBase
         _vaultKeepsService = vaultKeepsService;
     }
 
+    [HttpPost]
+    [Authorize]
+    public async Task<ActionResult<VaultKeep>> PostVaultKeep([FromBody]VaultKeep vaultKeepData)
+    {
+        try
+        {
+            Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+            vaultKeepData.creatorId = userInfo.Id;
+            VaultKeep vaultKeep = _vaultKeepsService.PostVaultKeep(vaultKeepData);
+            return vaultKeep;
+        }
+        catch (Exception exception)
+        {
+            return BadRequest(exception.Message);
+        }
+    }
 }

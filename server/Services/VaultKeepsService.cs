@@ -1,3 +1,4 @@
+
 namespace keeper.Services;
 
 public class VaultKeepsService
@@ -7,5 +8,11 @@ public class VaultKeepsService
     public VaultKeepsService(VaultKeepsRepository repo)
     {
         _repo = repo;
+    }
+
+    internal VaultKeep PostVaultKeep(VaultKeep vaultKeepData)
+    {
+        VaultKeep vaultKeep = _repo.PostVaultKeep(vaultKeepData);
+        return vaultKeep;
     }
 }
