@@ -32,6 +32,16 @@ CREATE TABLE vaults (
     isPrivate BOOLEAN NOT NULL,
     creatorId VARCHAR(255) NOT NULL,
     Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
-)
+);
 
-
+CREATE TABLE vaultKeeps (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+    keepId INT NOT NULL,
+    vaultId INT NOT NULL,
+    creatorId VARCHAR(255) NOT NULL,
+    Foreign Key (keepId) REFERENCES keeps (id) ON DELETE CASCADE,
+    Foreign Key (vaultId) REFERENCES vaults (id) ON DELETE CASCADE,
+    Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+);

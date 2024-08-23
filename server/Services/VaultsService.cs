@@ -16,7 +16,7 @@ public class VaultsService
     internal void DeleteVault(int vaultId, string userId)
     {
         Vault vaultToDelete = GetVaultById(vaultId, userId);
-        if(vaultToDelete.creatorId != userId)throw new Exception("You cannot delete this vault");
+        if (vaultToDelete.creatorId != userId) throw new Exception("You cannot delete this vault");
         _repo.DeleteVault(vaultId);
     }
 
