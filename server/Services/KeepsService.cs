@@ -16,6 +16,13 @@ public class KeepsService
         _repo = repo;
     }
 
+    internal void DeleteKeep(int keepId, string userId)
+    {
+        Keep keepToDelete = _repo.GetKeepById(keepId);
+        if(keepToDelete.creatorId != userId)throw new Exception("You cannot delete this keep");
+        _repo.deleteKeep(keepId);
+    }
+
     internal Keep EditKeep(Keep keepData)
     {
         Trace.WriteLine(keepData.Id);

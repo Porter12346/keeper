@@ -2,6 +2,7 @@
 
 
 
+
 namespace keeper.Repositories;
 
 public class KeepsRepository
@@ -11,6 +12,15 @@ public class KeepsRepository
     public KeepsRepository(IDbConnection db)
     {
         _db = db;
+    }
+
+    internal void deleteKeep(int keepId)
+    {
+        string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
+
+        int rowsAffected = _db.Execute(sql, new { keepId });
+        if (rowsAffected == 0) throw new Exception("none deleted");
+        if (rowsAffected > 1) throw new Exception("multiple deleted!!");
     }
 
     internal Keep EditKeep(Keep keepData)
