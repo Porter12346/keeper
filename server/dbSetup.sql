@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS accounts (
     picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8mb4 COMMENT '';
 
-ALTER TABLE accounts ADD COLUMN coverImg VARCHAR(1000) NOT NULL DEFAULT 'https://images.unsplash.com/photo-1494806812796-244fe51b774d?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+ALTER TABLE accounts
+ADD COLUMN coverImg VARCHAR(1000) NOT NULL DEFAULT 'https://images.unsplash.com/photo-1494806812796-244fe51b774d?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 
 CREATE TABLE keeps (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -17,5 +18,18 @@ CREATE TABLE keeps (
     description VARCHAR(1000) NOT NULL,
     img VARCHAR(1000) NOT NULL,
     views INT DEFAULT 0,
-    creatorId VARCHAR(255) NOT NULL, 
-    Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE);
+    creatorId VARCHAR(255) NOT NULL,
+    Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+);
+
+CREATE TABLE vault (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
+    updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
+    name VARCHAR(255) NOT NULL,
+    description VARCHAR(1000) NOT NULL,
+    img VARCHAR(1000) NOT NULL,
+    isPrivate BOOLEAN NOT NULL,
+    creatorId VARCHAR(255) NOT NULL,
+    Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
+)
