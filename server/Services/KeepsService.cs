@@ -1,5 +1,6 @@
 
 
+
 namespace keeper.Services;
 
 public class KeepsService
@@ -15,6 +16,12 @@ public class KeepsService
     {
         List<Keep> keeps = _repo.GetAllKeeps();
         return keeps;
+    }
+
+    internal Keep GetKeepById(int keepId)
+    {
+        Keep keep = _repo.GetKeepById(keepId);
+        return keep;
     }
 
     internal Keep PostKeep(Keep keepData)
