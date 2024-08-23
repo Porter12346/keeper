@@ -1,6 +1,7 @@
 
 
 
+
 namespace keeper.Repositories;
 
 public class VaultsRepository
@@ -10,6 +11,15 @@ public class VaultsRepository
     public VaultsRepository(IDbConnection db)
     {
         _db = db;
+    }
+
+    internal void DeleteVault(int vaultId)
+    {
+        string sql = "DELETE FROM vaults WHERE id = @vaultId LIMIT 1;";
+
+        int rowsAffected = _db.Execute(sql, new { vaultId });
+        if (rowsAffected == 0) throw new Exception("none deleted");
+        if (rowsAffected > 1) throw new Exception("multiple deleted!!");
     }
 
     internal Vault EditVault(Vault vaultData)
