@@ -1,10 +1,3 @@
-
-
-
-
-using System.Diagnostics;
-using Microsoft.Extensions.Logging;
-
 namespace keeper.Services;
 
 public class KeepsService
@@ -19,15 +12,14 @@ public class KeepsService
     internal void DeleteKeep(int keepId, string userId)
     {
         Keep keepToDelete = _repo.GetKeepById(keepId);
-        if(keepToDelete.creatorId != userId)throw new Exception("You cannot delete this keep");
+        if (keepToDelete.creatorId != userId) throw new Exception("You cannot delete this keep");
         _repo.deleteKeep(keepId);
     }
 
     internal Keep EditKeep(Keep keepData)
     {
-        Trace.WriteLine(keepData.Id);
         Keep keepToEdit = GetKeepById(keepData.Id);
-        if(keepToEdit.creatorId != keepData.creatorId)throw new Exception("You did not make this keep");
+        if (keepToEdit.creatorId != keepData.creatorId) throw new Exception("You did not make this keep");
         Keep keep = _repo.EditKeep(keepData);
         return keep;
     }

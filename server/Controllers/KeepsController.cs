@@ -64,7 +64,7 @@ public class KeepsController : ControllerBase
 
     [HttpPut("{keepId}")]
     [Authorize]
-    
+
     public async Task<ActionResult<Keep>> EditKeep([FromBody] Keep keepData, int keepId)
     {
         try
@@ -88,7 +88,7 @@ public class KeepsController : ControllerBase
     {
         try
         {
-            Account userInfo =  await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+            Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
             _keepsService.DeleteKeep(keepId, userInfo.Id);
             return ("Keep Deleted");
         }
