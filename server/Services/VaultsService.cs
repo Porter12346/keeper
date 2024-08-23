@@ -1,4 +1,5 @@
 
+
 namespace keeper.Services;
 
 public class VaultsService
@@ -8,6 +9,17 @@ public class VaultsService
     public VaultsService(VaultsRepository repo)
     {
         _repo = repo;
+    }
+
+    internal Vault GetVaultById(int vaultId, string userId)
+    {
+        Vault vault = _repo.GetVaultById(vaultId);
+        if (vault.isPrivate)
+        {
+            if (vault.creatorId != userId) throw new Exception("No vault found with given id");
+        }
+        if (vault == null) throw new Exception("No vault found with given id");
+        return vault;
     }
 
     internal Vault PostVault(Vault vaultData)
