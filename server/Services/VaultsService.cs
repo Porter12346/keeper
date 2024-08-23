@@ -30,8 +30,7 @@ public class VaultsService
 
     internal Vault GetVaultById(int vaultId, string userId)
     {
-        Vault vault = _repo.GetVaultById(vaultId);
-        if (vault == null) throw new Exception("No vault found with given id");
+        Vault vault = _repo.GetVaultById(vaultId) ?? throw new Exception("No vault found with given id");
         if (vault.isPrivate)
         {
             if (vault.creatorId != userId) throw new Exception("No vault found with given id");
