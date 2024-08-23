@@ -22,7 +22,7 @@ CREATE TABLE keeps (
     Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 );
 
-CREATE TABLE vault (
+CREATE TABLE vaults (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
     updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
@@ -33,3 +33,5 @@ CREATE TABLE vault (
     creatorId VARCHAR(255) NOT NULL,
     Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 )
+
+
