@@ -1,6 +1,7 @@
 
 
 
+
 namespace keeper.Repositories;
 
 public class KeepsRepository
@@ -10,6 +11,27 @@ public class KeepsRepository
     public KeepsRepository(IDbConnection db)
     {
         _db = db;
+    }
+
+    internal Keep EditKeep(Keep keepData)
+    {
+        string sql = @"
+        UPDATE
+        keeps
+        SET
+        name = @name,
+        description = @description
+        WHERE keeps.id = @id;
+        
+        SELECT 
+        keeps.*,
+        accounts.*
+        FROM keeps
+        JOIN accounts ON accounts.id = keeps.creatorId
+        WHERE keeps.id = @id;";
+
+        Keep keep = _db.Query<Keep, Profile, Keep>(sql, JoinCreator, keepData).FirstOrDefault();
+        return keep;
     }
 
     internal List<Keep> GetAllKeeps()
