@@ -1,3 +1,5 @@
+
+
 namespace keeper.Services;
 
 public class KeepsService
@@ -7,5 +9,17 @@ public class KeepsService
     public KeepsService(KeepsRepository repo)
     {
         _repo = repo;
+    }
+
+    internal List<Keep> GetAllKeeps()
+    {
+        List<Keep> keeps = _repo.GetAllKeeps();
+        return keeps;
+    }
+
+    internal Keep PostKeep(Keep keepData)
+    {
+        Keep keep = _repo.PostKeep(keepData);
+        return keep;
     }
 }

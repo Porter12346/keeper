@@ -7,6 +7,8 @@ CREATE TABLE IF NOT EXISTS accounts (
     picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8mb4 COMMENT '';
 
+ALTER TABLE accounts ADD COLUMN coverImg VARCHAR(1000) NOT NULL DEFAULT 'https://images.unsplash.com/photo-1494806812796-244fe51b774d?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+
 CREATE TABLE keeps (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
