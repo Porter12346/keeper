@@ -1,5 +1,6 @@
 
 
+
 namespace keeper.Repositories;
 
 public class VaultsRepository
@@ -9,6 +10,27 @@ public class VaultsRepository
     public VaultsRepository(IDbConnection db)
     {
         _db = db;
+    }
+
+    internal Vault EditVault(Vault vaultData)
+    {
+        string sql = @"
+        UPDATE
+        vaults
+        SET
+        name = @name,
+        isPrivate = @isPrivate
+        WHERE vaults.id = @id;
+        
+        SELECT
+        vaults.*,
+        accounts.*
+        FROM vaults
+        JOIN accounts ON accounts.id = vaults.creatorId
+        WHERE vaults.id = @id;";
+
+        Vault vault = _db.Query<Vault, Profile, Vault>(sql, JoinCreator, vaultData).FirstOrDefault();
+        return vault;
     }
 
     internal Vault GetVaultById(int vaultId)

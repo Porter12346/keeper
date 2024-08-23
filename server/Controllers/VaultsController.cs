@@ -36,10 +36,28 @@ public class VaultsController : ControllerBase
     {
         try
         {
-            Account userInfo =  await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+            Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
             Vault vault = _vaultsService.GetVaultById(vaultId, userInfo.Id);
             return vault;
 
+        }
+        catch (Exception exception)
+        {
+            return BadRequest(exception.Message);
+        }
+    }
+
+    [HttpPut("{vaultId}")]
+    [Authorize]
+    public async Task<ActionResult<Vault>> EditVault([FromBody] Vault vaultData, int vaultId)
+    {
+        try
+        {
+            vaultData.Id = vaultId;
+            Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+            vaultData.creatorId = userInfo.Id;
+            Vault vault = _vaultsService.EditVault(vaultData);
+            return vault;
         }
         catch (Exception exception)
         {
