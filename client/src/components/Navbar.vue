@@ -18,29 +18,15 @@ function toggleTheme() {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <h5 class="text-success btn text-success lighten-30 selectable text-uppercase navbar-nav px-3 text-center">Home
+  <nav class="bg-light px-3 d-flex justify-content-between align-items-center border-bottom mb-3">
+    <router-link class="d-flex" :to="{ name: 'Home' }">
+      <h5 class="text-success btn text-success lighten-30 selectable text-uppercase px-3 text-center mb-0">Home
       </h5>
     </router-link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <div>
-
-      </div>
-      <ul class="navbar-nav me-auto">
-
-      </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <div>
-        <button class="btn text-light" @click="toggleTheme"
-          :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
-          <Icon :name="theme == 'light' ? 'weather-sunny' : 'weather-night'" />
-        </button>
-      </div>
+    <div class="flex-grow-1 text-end">
+      <img height="60" src="../assets/img/logo.png" alt="The Keeper Co.">
+    </div>
+    <div class="flex-grow-1 text-end px-3">
       <Login />
     </div>
   </nav>
