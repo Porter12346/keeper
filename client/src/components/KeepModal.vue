@@ -13,10 +13,10 @@ const account = computed(() => AppState.account)
             <div class="modal-content">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 col-12 p-0">
-                            <img class="img-fluid w-100 rounded " :src="keep.img" :alt="keep.name">
+                        <div class="col-lg-6 col-12 p-0">
+                            <img class="img-fluid w-100 img-sizing rounded " :src="keep.img" :alt="keep.name">
                         </div>
-                        <div class="col-md-6 col-12 p-0 d-flex flex-column justify-content-between px-4">
+                        <div class="col-lg-6 col-12 p-0 d-flex flex-column justify-content-between px-4">
                             <div>
                                 <p class="fs-4 text-center d-flex justify-content-center gap-4 pb-3 pb-md-0"><span
                                         class="mdi mdi-eye">{{ keep.views }}</span><span
@@ -26,11 +26,11 @@ const account = computed(() => AppState.account)
                                 <h1 class="text-center">
                                     {{ keep.name }}
                                 </h1>
-                                <p>
+                                <p class="text-center">
                                     {{ keep.description }}
                                 </p>
                             </div>
-                            <div class="d-flex justify-content-around align-items-center pb-2">
+                            <div class="d-flex justify-content-around align-items-center pb-3">
                                 <div v-if="account" class="d-flex gap-3 align-items-center">
                                     <h5 class="mb-0">tbd</h5>
                                     <button class="btn btn-secondary">save</button>
@@ -54,5 +54,11 @@ const account = computed(() => AppState.account)
 .profile-pic {
     height: 5vh;
     border-radius: 50%;
+}
+
+.img-sizing {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 </style>

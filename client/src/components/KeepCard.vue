@@ -16,7 +16,7 @@ async function openKeep() {
 
 
 <template>
-    <img class="img-fluid keep-img" :src="keepProp.img" :alt="keepProp.name" @click="openKeep()" type="button">
+    <img class="img-fluid keep-img rounded" :src="keepProp.img" :alt="keepProp.name" @click="openKeep()" type="button">
     <div class="d-flex justify-content-between align-items-center neg-marg">
         <p class="mx-2 mb-0 fs-md-4 fw-bold text-light text-shadow my-3">{{ keepProp.name }}</p>
         <img class="profile-pic mx-2 d-md-block d-none" :src="keepProp.creator.picture" :alt="keepProp.creator.name">
@@ -37,7 +37,7 @@ async function openKeep() {
 }
 
 .neg-marg {
-    margin-top: -6vh;
+    margin-top: -7vh;
 }
 
 .text-shadow {

@@ -3,6 +3,11 @@ import { api } from "./AxiosService.js";
 import { AppState } from "@/AppState.js";
 
 class KeepsService{
+    async createKeep(data) {
+        const response = await api.post('api/keeps', data)
+        const keep = new Keep(response.data)
+        AppState.keeps.unshift(keep)
+    }
     setActive(keepProp) {
         AppState.activeKeep = keepProp;
     }
@@ -10,7 +15,7 @@ class KeepsService{
     async getKeeps() {
         const response = await api.get('api/keeps')
         const keeps = response.data.map((data)=>new Keep(data))
-        AppState.keeps = keeps
+        AppState.keeps = keeps.reverse()
     }
 
 }

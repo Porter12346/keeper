@@ -46,7 +46,8 @@ public class KeepsRepository
         keeps.*,
         accounts.*
         FROM keeps
-        JOIN accounts ON accounts.id = keeps.creatorId;";
+        JOIN accounts ON accounts.id = keeps.creatorId 
+        ORDER BY keeps.id;";
 
         List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, JoinCreator).ToList();
         return keeps;

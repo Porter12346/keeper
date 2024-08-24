@@ -1,7 +1,9 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
+import KeepForm from '@/components/KeepForm.vue';
 import KeepModal from '@/components/KeepModal.vue';
+import VaultForm from '@/components/VaultForm.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import { computed, onMounted } from 'vue';
 
@@ -27,6 +29,8 @@ function getKeeps() {
     </div>
   </div>
   <KeepModal />
+  <KeepForm />
+  <VaultForm />
 </template>
 
 <style scoped lang="scss">
