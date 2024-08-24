@@ -3,6 +3,7 @@ import { AppState } from '@/AppState.js';
 import { computed } from 'vue';
 
 const keep = computed(() => AppState.activeKeep)
+const account = computed(() => AppState.account)
 </script>
 
 
@@ -12,16 +13,16 @@ const keep = computed(() => AppState.activeKeep)
             <div class="modal-content">
                 <div class="container">
                     <div class="row">
-                        <div class="col-6 p-0">
-                            <img class="img-fluid w-100 rounded-start" :src="keep.img" :alt="keep.name">
+                        <div class="col-md-6 col-12 p-0">
+                            <img class="img-fluid w-100 rounded " :src="keep.img" :alt="keep.name">
                         </div>
-                        <div class="col-6 p-0 d-flex flex-column justify-content-between px-4">
+                        <div class="col-md-6 col-12 p-0 d-flex flex-column justify-content-between px-4">
                             <div>
-                                <p class="fs-4 text-center d-flex justify-content-center gap-4"><span
+                                <p class="fs-4 text-center d-flex justify-content-center gap-4 pb-3 pb-md-0"><span
                                         class="mdi mdi-eye">{{ keep.views }}</span><span
                                         class="mdi mdi-safe-square-outline">{{ keep.kept }}</span></p>
                             </div>
-                            <div>
+                            <div class="pb-5 pb-md-0">
                                 <h1 class="text-center">
                                     {{ keep.name }}
                                 </h1>
@@ -30,10 +31,13 @@ const keep = computed(() => AppState.activeKeep)
                                 </p>
                             </div>
                             <div class="d-flex justify-content-around align-items-center pb-2">
-                                <h5 class="mb-0">tbd</h5>
-                                <button class="btn btn-secondary">save</button>
+                                <div v-if="account" class="d-flex gap-3 align-items-center">
+                                    <h5 class="mb-0">tbd</h5>
+                                    <button class="btn btn-secondary">save</button>
+                                </div>
                                 <div class="d-flex align-items-center">
-                                    <img class="profile-pic ms-5 px-2" :src="keep.creator.picture" :alt="keep.creator.name">
+                                    <img class="profile-pic ms-5 px-2" :src="keep.creator.picture"
+                                        :alt="keep.creator.name">
                                     <p class="mb-0">{{ keep.creator.name }}</p>
                                 </div>
                             </div>
@@ -47,7 +51,8 @@ const keep = computed(() => AppState.activeKeep)
 
 
 <style lang="scss" scoped>
-.profile-pic{
+.profile-pic {
     height: 5vh;
     border-radius: 50%;
-}</style>
+}
+</style>
