@@ -45,3 +45,10 @@ CREATE TABLE vaultKeeps (
     Foreign Key (vaultId) REFERENCES vaults (id) ON DELETE CASCADE,
     Foreign Key (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 );
+
+
+        SELECT
+        *
+        FROM
+        accounts
+        WHERE id = '66a2c37fb15908fef1488d03';
