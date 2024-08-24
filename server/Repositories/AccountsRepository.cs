@@ -1,3 +1,4 @@
+
 namespace keeper.Repositories;
 
 public class AccountsRepository
@@ -43,5 +44,18 @@ public class AccountsRepository
     _db.Execute(sql, update);
     return update;
   }
+
+    internal List<Vault> GetAccountVaults(string id)
+    {
+        string sql = @"
+        SELECT 
+        *
+        FROM
+        vaults
+        WHERE creatorId = @id;";
+        
+        List<Vault> vaults = _db.Query<Vault>(sql, new { id }).ToList();
+        return vaults;
+    }
 }
 

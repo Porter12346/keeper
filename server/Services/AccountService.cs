@@ -1,3 +1,4 @@
+
 namespace keeper.Services;
 
 public class AccountService
@@ -36,4 +37,10 @@ public class AccountService
     original.Picture = editData.Picture ?? editData.Picture;
     return _repo.Edit(original);
   }
+
+    internal List<Vault> GetAccountVaults(string id)
+    {
+        List<Vault> vaults = _repo.GetAccountVaults(id);
+        return vaults;
+    }
 }

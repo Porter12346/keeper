@@ -27,4 +27,20 @@ public class AccountController : ControllerBase
       return BadRequest(e.Message);
     }
   }
+
+  [HttpGet("vaults")]
+  public async Task<ActionResult<List<Vault>>> GetAccountVaults()
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      List<Vault> vaults = _accountService.GetAccountVaults(userInfo.Id);
+      return vaults;
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+
+  }
 }
