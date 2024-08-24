@@ -18,15 +18,15 @@ function toggleTheme() {
 </script>
 
 <template>
-  <nav class="bg-light px-3 d-flex justify-content-between align-items-center border-bottom mb-3">
-    <router-link class="d-flex" :to="{ name: 'Home' }">
+  <nav class="bg-light px-3 d-flex justify-content-between align-items-center border-bottom mb-md-3 md-0">
+    <router-link class="d-flex flex-grow-1 flex-md-grow-0 order-md-0 order-1" :to="{ name: 'Home' }">
       <h5 class="text-success btn text-success lighten-30 selectable text-uppercase px-3 text-center mb-0">Home
       </h5>
     </router-link>
-    <div class="flex-grow-1 text-end">
-      <img height="60" src="../assets/img/logo.png" alt="The Keeper Co.">
-    </div>
-    <div class="flex-grow-1 text-end px-3">
+    <router-link class="flex-grow-1 text-md-center order-md-1 order-0" :to="{ name: 'Home' }" >
+      <img height=" 60" src="../assets/img/logo.png" alt="The Keeper Co.">
+    </router-link>
+    <div class="text-end px-3 order-2">
       <Login />
     </div>
   </nav>
