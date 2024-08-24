@@ -5,15 +5,13 @@ import { AppState } from './AppState.js';
 </script>
 
 <template>
-  <header>
+  <header class="order-md-0 order-1 sticky-bottom">
     <Navbar />
   </header>
   <main>
     <router-view />
   </main>
-  <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
-  </footer>
+
 </template>
 
 <style lang="scss">
