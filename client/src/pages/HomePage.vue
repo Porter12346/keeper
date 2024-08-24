@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
+import KeepModal from '@/components/KeepModal.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import { computed, onMounted } from 'vue';
 
@@ -18,14 +19,14 @@ function getKeeps() {
     <div class="row">
       <div class="col-12">
         <div class="grid">
-          <div class="item my-4 mx-1 " v-for="keep in keeps" :key="keep.id">
+          <div class="item my-4 mx-1" v-for="keep in keeps" :key="keep.id">
             <KeepCard :keep-prop="keep" />
           </div>
         </div>
       </div>
     </div>
   </div>
-
+  <KeepModal />
 </template>
 
 <style scoped lang="scss">

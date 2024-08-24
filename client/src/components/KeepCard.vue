@@ -1,18 +1,25 @@
 <script setup>
 import { Keep } from '@/models/Keep.js';
+import { keepsService } from '@/services/KeepsService.js';
+import { Modal } from 'bootstrap';
 
 const props = defineProps({
     keepProp: { type: Keep, required: true }
 })
+
+async function openKeep() {
+    await keepsService.setActive(props.keepProp)
+    Modal.getOrCreateInstance("#keepModal").show()
+}
+// data-bs-toggle="modal" data-bs-target="#"
 </script>
 
 
 <template>
-    <img class="img-fluid keep-img" :src="keepProp.img" :alt="keepProp.name">
+    <img class="img-fluid keep-img" :src="keepProp.img" :alt="keepProp.name" @click="openKeep()" type="button">
     <div class="d-flex justify-content-between align-items-center neg-marg">
         <p class="mx-2 mb-0 fs-md-4 fw-bold text-light text-shadow my-3">{{ keepProp.name }}</p>
-        <img class="profile-pic mx-2 d-md-block d-none" :src="keepProp.creator.picture"
-            :alt="keepProp.creator.name">
+        <img class="profile-pic mx-2 d-md-block d-none" :src="keepProp.creator.picture" :alt="keepProp.creator.name">
     </div>
 </template>
 
@@ -29,10 +36,11 @@ const props = defineProps({
     aspect-ratio: 1/1;
 }
 
-.neg-marg{
+.neg-marg {
     margin-top: -6vh;
 }
-.text-shadow{
+
+.text-shadow {
     text-shadow: 1px 1px 10px black;
 }
 </style>
