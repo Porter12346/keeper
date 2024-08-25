@@ -20,7 +20,7 @@ function getKeeps() {
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <div class="grid">
+        <div class="grid pb-3">
           <div class="item my-4 mx-1" v-for="keep in keeps" :key="keep.id">
             <KeepCard :keep-prop="keep" />
           </div>
@@ -28,9 +28,6 @@ function getKeeps() {
       </div>
     </div>
   </div>
-  <KeepModal />
-  <KeepForm />
-  <VaultForm />
 </template>
 
 <style scoped lang="scss">

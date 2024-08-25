@@ -19,7 +19,7 @@ async function openKeep() {
 
 async function openProfile() {
     await profilesService.setProfile(props.keepProp.creator)
-    router.push({name: 'Profile', params: {profileId: props.keepProp.id}})
+    router.push({name: 'Profile', params: {profileId: props.keepProp.creator.id}})
 }
 // data-bs-toggle="modal" data-bs-target="#"
 
@@ -30,7 +30,7 @@ async function openProfile() {
     <img class="img-fluid keep-img rounded" :src="keepProp.img" :alt="keepProp.name" @click="openKeep()" type="button">
     <div class="d-flex justify-content-between align-items-center neg-marg">
         <p class="mx-2 mb-3 fs-md-4 fw-bold text-light text-shadow my-3">{{ keepProp.name }}</p>
-        <img @click="openProfile()" type="button" class="profile-pic mx-2 d-md-block d-none" :src="keepProp.creator.picture" :alt="keepProp.creator.name">
+        <img v-if="keepProp.creator" @click="openProfile()" type="button" class="profile-pic mx-2 d-md-block d-none" :src="keepProp.creator.picture" :alt="keepProp.creator.name">
     </div>
 </template>
 
