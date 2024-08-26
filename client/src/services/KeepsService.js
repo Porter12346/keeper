@@ -8,8 +8,10 @@ class KeepsService{
         const keep = new Keep(response.data)
         AppState.keeps.unshift(keep)
     }
-    setActive(keepProp) {
+    async setActive(keepProp) {
+        keepProp.views++
         AppState.activeKeep = keepProp;
+        await api.get(`api/keeps/${keepProp.id}`)
     }
 
     async getKeeps() {

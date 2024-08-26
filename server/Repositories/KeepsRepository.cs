@@ -25,7 +25,8 @@ public class KeepsRepository
         keeps
         SET
         name = @name,
-        description = @description
+        description = @description,
+        views = @views
         WHERE keeps.id = @id;
         
         SELECT 

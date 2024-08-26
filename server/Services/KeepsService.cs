@@ -36,6 +36,14 @@ public class KeepsService
         return keep;
     }
 
+    internal Keep incrementViews(int keepId)
+    {
+        Keep keep = _repo.GetKeepById(keepId) ?? throw new Exception("No Keep Found");
+        keep.views++;
+        _repo.EditKeep(keep);
+        return keep;
+    }
+
     internal Keep PostKeep(Keep keepData)
     {
         Keep keep = _repo.PostKeep(keepData);
