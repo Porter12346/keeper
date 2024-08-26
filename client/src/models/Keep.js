@@ -4,6 +4,7 @@ export class Keep{
     this.createdAt = data.createdAt
     this.updatedAt = data.updatedAt
     this.name = data.name
+    this.vaultKeepId = data.vaultKeepId
     this.description = data.description
     this.img = data.img
     this.views = data.views

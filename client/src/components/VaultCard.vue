@@ -1,16 +1,24 @@
 <script setup>
 import { Vault } from '@/models/Vault.js';
 import VaultsPage from '@/pages/VaultPage.vue';
+import { vaultsService } from '@/services/VaultsService.js';
+import { useRouter } from 'vue-router';
 
+const router = useRouter()
 const props = defineProps({ vaultProp: { type: Vault, required: true } })
+
+async function goToVault() {
+    vaultsService.setActiveVault(props.vaultProp)
+    router.push({ name: 'Vault', params: { vaultId: props.vaultProp.id } })
+}
 </script>
 
 
 <template>
-    <router-link :to="{name: 'Vault',  params: {vaultId: vaultProp.id}}">
-        <img class="img-fluid img-style rounded shadow" :src="vaultProp.img" :alt="vaultProp.name">
+    <div @click="goToVault()">
+        <img type="button" class="img-fluid img-style rounded shadow" :src="vaultProp.img" :alt="vaultProp.name">
         <h3 class="neg-mar text-light ps-2">{{ vaultProp.name }}</h3>
-    </router-link>
+    </div>
 </template>
 
 

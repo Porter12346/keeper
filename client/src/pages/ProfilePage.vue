@@ -48,7 +48,7 @@ async function getProfileVaults() {
                 <h2>Keeps</h2>
                 <div class="grid pb-3">
                     <div class="item my-4 mx-1" v-for="keep in keeps" :key="keep.id">
-                        <KeepCard :keep-prop="keep" />
+                        <KeepCard :keep-prop="keep" :show-creator="false"/>
                     </div>
                 </div>
             </div>
