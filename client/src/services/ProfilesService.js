@@ -6,12 +6,14 @@ import { Keep } from "@/models/Keep.js"
 
 class ProfilesService{
     async getProfileVaults(profileId) {
+        AppState.vaults =  []
         const response = await api.get(`api/profiles/${profileId}/vaults`)
         const vaults = response.data.map((data)=>new Vault(data))
         AppState.vaults = vaults
     }
     
     async getProfileKeeps(profileId) {
+        AppState.keeps =  []
         const response = await api.get(`api/profiles/${profileId}/keeps`)
         const keeps = response.data.map((data)=>new Keep(data))
         AppState.keeps = keeps

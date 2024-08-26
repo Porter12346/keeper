@@ -31,7 +31,7 @@ async function openProfile() {
     <img class="img-fluid keep-img rounded" :src="keepProp.img" :alt="keepProp.name" @click="openKeep()" type="button">
     <div class="d-flex justify-content-between align-items-center neg-marg">
         <p class="mx-2 mb-3 fs-md-4 fw-bold text-light text-shadow my-3 fs-5">{{ keepProp.name }}</p>
-        <img v-if="showCreator" @click="openProfile()" type="button" class="profile-pic mx-2 d-md-block d-none shadow" :src="keepProp.creator.picture" :alt="keepProp.creator.name">
+        <img v-if="showCreator && keepProp.creator" @click="openProfile()" type="button" class="profile-pic mx-2 d-md-block d-none shadow" :src="keepProp.creator.picture" :alt="keepProp.creator.name">
     </div>
 </template>
 

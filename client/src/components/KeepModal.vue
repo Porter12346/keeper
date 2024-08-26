@@ -12,6 +12,7 @@ const keep = computed(() => AppState.activeKeep)
 const account = computed(() => AppState.account)
 
 function toProfile() {
+    Modal.getOrCreateInstance('#keepModal').hide()
     router.push({ name: "Profile", params: { profileId: keep.value.creator.id } })
 }
 
@@ -61,7 +62,7 @@ async function deleteVaultKeep() {
                                 <div v-if="keep.creator" class="d-flex align-items-center">
                                     <img @click="toProfile()" type="button" class="profile-pic ms-5 mx-2 pic-shadow"
                                         :src="keep.creator.picture" :alt="keep.creator.name">
-                                    <p class="mb-0">{{ keep.creator.name }}</p>
+                                    <p class="mb-0 fw-bold">{{ keep.creator.name }}</p>
                                 </div>
                             </div>
                         </div>

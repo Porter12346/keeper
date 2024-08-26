@@ -38,7 +38,7 @@ async function getProfileVaults() {
                     <img class="profile-pic" :src="profile.picture" :alt="profile.name">
                 </div>
                 <h1 class="text-center">{{ profile.name }}</h1>
-                <p class="text-center">{{ keeps.length }} Vaults | {{ keeps.length }} Keeps</p>
+                <p class="text-center">{{ vaults.length }} Vaults | {{ keeps.length }} Keeps</p>
                 <h2>Vaults</h2>
                 <div class="row">
                     <div class="col-3 pb-5 px-3" v-for="vault in vaults" :key="vault.id">
