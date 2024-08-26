@@ -3,6 +3,7 @@ import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import { vaultsService } from '@/services/VaultsService.js';
+import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -13,12 +14,24 @@ const route = useRoute()
 onMounted(() => getVault())
 
 async function getVault() {
-    await vaultsService.getVaultById(route.params.vaultId)
-    getVaultKeeps()
+    try {
+        await vaultsService.getVaultById(route.params.vaultId)
+        getVaultKeeps()
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+
 }
 
 async function getVaultKeeps() {
-    await vaultsService.getVaultKeeps(vault.value.id)
+    try {
+        await vaultsService.getVaultKeeps(vault.value.id)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+
 }
 </script>
 
@@ -35,14 +48,14 @@ async function getVaultKeeps() {
                         <p class="text-center text-light text-shadow">By {{ vault.creator.name }}</p>
                     </div>
                 </div>
-                    <div class="text-center pt-3">
-                        <span class="text-center bg-info-subtle rounded-5 p-2">{{ keeps?.length }} Keeps</span>
-                        <div class="grid pb-3">
-                            <div class="item my-4 mx-1" v-for="keep in keeps" :key="keep.id">
-                                <KeepCard :keep-prop="keep" :show-creator="false" />
-                            </div>
+                <div class="text-center pt-3">
+                    <span class="text-center bg-info-subtle rounded-5 p-2">{{ keeps?.length }} Keeps</span>
+                    <div class="grid pb-3">
+                        <div class="item my-4 mx-1" v-for="keep in keeps" :key="keep.id">
+                            <KeepCard :keep-prop="keep" :show-creator="false" />
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div>

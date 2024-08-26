@@ -3,6 +3,7 @@ import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
 import VaultCard from '@/components/VaultCard.vue';
 import { profilesService } from '@/services/ProfilesService.js';
+import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
@@ -18,11 +19,22 @@ onMounted(() => {
 })
 
 async function getProfileKeeps() {
-    profilesService.getProfileKeeps(route.params.profileId)
+    try {
+        await profilesService.getProfileKeeps(route.params.profileId)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+
 }
 
 async function getProfileVaults() {
-    profilesService.getProfileVaults(route.params.profileId)
+    try {
+        await profilesService.getProfileVaults(route.params.profileId)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
 }
 </script>
 
@@ -48,7 +60,7 @@ async function getProfileVaults() {
                 <h2>Keeps</h2>
                 <div class="grid pb-3">
                     <div class="item my-4 mx-1" v-for="keep in keeps" :key="keep.id">
-                        <KeepCard :keep-prop="keep" :show-creator="false"/>
+                        <KeepCard :keep-prop="keep" :show-creator="false" />
                     </div>
                 </div>
             </div>
