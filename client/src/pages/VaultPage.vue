@@ -43,9 +43,9 @@ async function getVaultKeeps() {
     <div v-if="vault">
         <div class="container">
             <div class="row">
-                <div class="col-4"></div>
-                <div class="col-md-4 col-12">
-                    <img class="img-fluid" :src="vault.img" :alt="vault.name">
+                <div class="col-2"></div>
+                <div class="col-md-8 col-12">
+                    <img class="coverImg" :src="vault.img" :alt="vault.name">
                     <div class="neg-mar">
                         <h1 class="text-center text-light text-shadow">{{ vault.name }}</h1>
                         <p class="text-center text-light text-shadow">By {{ vault.creator.name }}</p>
@@ -53,7 +53,7 @@ async function getVaultKeeps() {
                 </div>
                 <div class="text-center pt-3">
                     <span class="text-center bg-info-subtle rounded-5 p-2">{{ keeps?.length }} Keeps</span>
-                    <div class="grid pb-3">
+                    <div class="grid pb-3 pt-5">
                         <div class="item my-4 mx-1" v-for="keep in keeps" :key="keep.id">
                             <KeepCard :keep-prop="keep" :show-creator="false" />
                         </div>
@@ -81,5 +81,11 @@ async function getVaultKeeps() {
 .grid {
     columns: 12rem 4;
     column-gap: 1rem;
+}
+.coverImg{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 6/2;
 }
 </style>

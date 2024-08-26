@@ -29,11 +29,13 @@ async function logout() {
         </div>
         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
           <div class="list-group">
-            <router-link :to="{ name: 'Account' }">
+            <div v-if="account">
+            <router-link :to="{ name: 'Profile', params: { profileId: `${account.id}`} }">
               <div class="list-group-item dropdown-item list-group-item-action">
                 Manage Account
               </div>
             </router-link>
+          </div>
             <div class="list-group-item dropdown-item list-group-item-action text-danger selectable" @click="logout">
               <i class="mdi mdi-logout"></i>
               logout

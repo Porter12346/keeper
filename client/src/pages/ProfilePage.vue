@@ -2,7 +2,9 @@
 import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
 import VaultCard from '@/components/VaultCard.vue';
+import { accountService } from '@/services/AccountService.js';
 import { profilesService } from '@/services/ProfilesService.js';
+import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
@@ -11,12 +13,10 @@ const route = useRoute()
 const profile = computed(() => AppState.activeProfile)
 const vaults = computed(() => AppState.vaults)
 const keeps = computed(() => AppState.keeps)
+const account = computed(() => AppState.account)
+const identity = computed(()=>AppState.identity)
 
-onMounted(() => {
-    if (!profile.value) profilesService.getProfileById(route.params.profileId);
-    getProfileKeeps();
-    getProfileVaults();
-})
+onMounted(() => { getProfile() })
 
 async function getProfileKeeps() {
     try {
@@ -25,6 +25,29 @@ async function getProfileKeeps() {
     catch (error) {
         Pop.error(error);
     }
+
+}
+
+async function getProfile() {
+    try {
+        await profilesService.getProfileById(route.params.profileId);
+        getProfileKeeps()
+        if (route.params.profileId != identity.value.id) {
+            logger.log("profile")
+            await getProfileVaults();
+        }
+        else {
+            logger.log("account")
+            await getAccountVaults();
+        }
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
+
+function getAccountVaults() {
+    accountService.setAccountVaults()
 
 }
 
