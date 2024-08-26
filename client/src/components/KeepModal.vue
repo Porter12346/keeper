@@ -1,9 +1,28 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { vaultKeepService } from '@/services/VaultKeepService.js';
+import Pop from '@/utils/Pop.js';
+import { Modal } from 'bootstrap';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 
 const keep = computed(() => AppState.activeKeep)
 const account = computed(() => AppState.account)
+
+function toProfile() {
+    router.push({ name: "Profile", params: { profileId: keep.value.creator.id } })
+}
+
+async function deleteVaultKeep() {
+    try {
+        await vaultKeepService.deleteVaultKeep(keep.value.vaultKeepId)
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
 </script>
 
 
@@ -31,13 +50,17 @@ const account = computed(() => AppState.account)
                                 </p>
                             </div>
                             <div class="d-flex justify-content-around align-items-center pb-3">
-                                <div v-if="account" class="d-flex gap-3 align-items-center">
+                                <div v-if="keep.vaultKeepId && keep.creatorId == account?.id">
+                                    <p @click="deleteVaultKeep()" class="border-bottom mb-0" type="button"><i class="mdi mdi-cancel"></i> Remove
+                                    </p>
+                                </div>
+                                <div v-else-if="account" class="d-flex gap-3 align-items-center">
                                     <h5 class="mb-0">tbd</h5>
                                     <button class="btn btn-secondary">save</button>
                                 </div>
-                                <div class="d-flex align-items-center">
-                                    <img class="profile-pic ms-5 px-2" :src="keep.creator.picture"
-                                        :alt="keep.creator.name">
+                                <div v-if="keep.creator" class="d-flex align-items-center">
+                                    <img @click="toProfile()" type="button" class="profile-pic ms-5 mx-2 pic-shadow"
+                                        :src="keep.creator.picture" :alt="keep.creator.name">
                                     <p class="mb-0">{{ keep.creator.name }}</p>
                                 </div>
                             </div>
@@ -60,5 +83,9 @@ const account = computed(() => AppState.account)
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+
+.pic-shadow {
+    box-shadow: 0px 0px 12px black;
 }
 </style>

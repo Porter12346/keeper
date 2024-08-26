@@ -13,6 +13,7 @@ class KeepsService{
     }
 
     async getKeeps() {
+        AppState.keeps = []
         const response = await api.get('api/keeps')
         const keeps = response.data.map((data)=>new Keep(data))
         AppState.keeps = keeps.reverse()

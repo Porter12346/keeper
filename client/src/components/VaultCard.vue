@@ -17,7 +17,7 @@ async function goToVault() {
 <template>
     <div @click="goToVault()">
         <img type="button" class="img-fluid img-style rounded shadow" :src="vaultProp.img" :alt="vaultProp.name">
-        <h3 class="neg-mar text-light ps-2">{{ vaultProp.name }}</h3>
+        <h4 class="neg-mar text-light ps-2">{{ vaultProp.name }}</h4>
     </div>
 </template>
 
