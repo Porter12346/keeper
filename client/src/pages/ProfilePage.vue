@@ -76,7 +76,7 @@ async function getProfileVaults() {
                 <p class="text-center">{{ vaults.length }} Vaults | {{ keeps.length }} Keeps</p>
                 <h2>Vaults</h2>
                 <div class="row">
-                    <div class="col-3 pb-5 px-3" v-for="vault in vaults" :key="vault.id">
+                    <div class="col-md-3 col-6 pb-5 px-3" v-for="vault in vaults" :key="vault.id">
                         <VaultCard :vault-prop="vault" />
                     </div>
                 </div>

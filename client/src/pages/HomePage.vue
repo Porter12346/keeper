@@ -17,7 +17,7 @@ function getKeeps() {
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <div v-if="keeps" class="grid pb-3">
+        <div v-if="keeps" class="grid pb-3 pt-2">
           <div class="item my-4 mx-1" v-for="keep in keeps" :key="keep.id">
             <KeepCard :keep-prop="keep" />
           </div>

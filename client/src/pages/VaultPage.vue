@@ -44,9 +44,9 @@ async function getVaultKeeps() {
         <div class="container">
             <div class="row">
                 <div class="col-2"></div>
-                <div class="col-md-8 col-12">
+                <div class="col-md-8 col-12 position-relative p-0">
                     <img class="coverImg" :src="vault.img" :alt="vault.name">
-                    <div class="neg-mar">
+                    <div class="position-absolute positioning">
                         <h1 class="text-center text-light text-shadow">{{ vault.name }}</h1>
                         <p class="text-center text-light text-shadow">By {{ vault.creator.name }}</p>
                     </div>
@@ -74,8 +74,9 @@ async function getVaultKeeps() {
     text-shadow: 1px 1px 5px black;
 }
 
-.neg-mar {
-    margin-top: -9vh;
+.positioning{
+    width: 100%;
+    top: 50%;
 }
 
 .grid {

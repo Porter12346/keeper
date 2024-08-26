@@ -25,6 +25,7 @@ const selectedVault = ref()
 async function createVaultKeep() {
     try {
         vaultKeepService.createVaultKeep(keep.value.id, selectedVault.value)
+        keep.value.kept++
     }
     catch (error) {
         Pop.error(error);
@@ -54,7 +55,7 @@ async function deleteVaultKeep() {
                         </div>
                         <div class="col-lg-6 col-12 p-0 d-flex flex-column justify-content-between px-4">
                             <div>
-                                <p class="fs-4 text-center d-flex justify-content-center gap-4 pb-3 pb-md-0"><span
+                                <p class="fs-4 text-center d-flex justify-content-center gap-4 pb-3 pb-md-0 pt-md-5"><span
                                         class="mdi mdi-eye">{{ keep.views }}</span><span
                                         class="mdi mdi-safe-square-outline">{{ keep.kept }}</span></p>
                             </div>

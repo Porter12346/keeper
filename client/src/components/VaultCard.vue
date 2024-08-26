@@ -16,16 +16,22 @@ async function goToVault() {
 
 <template>
     <div @click="goToVault()">
-        <img type="button" class="img-fluid img-style rounded shadow" :src="vaultProp.img" :alt="vaultProp.name">
-        <h4 class="neg-mar text-light ps-2">{{ vaultProp.name }}</h4>
+        <div class="position-relative">
+            <img type="button" class="img-fluid img-style rounded shadow" :src="vaultProp.img" :alt="vaultProp.name">
+            <h4 class="position-absolute text-pos text-light ps-2 fs-md-4 fs-6">{{ vaultProp.name }}</h4>
+        </div>
+
     </div>
 </template>
 
 
 <style lang="scss" scoped>
-.neg-mar {
-    margin-top: -5vh;
-    text-shadow: 1px 1px 5px black;
+.text-pos {
+    bottom: 0%;
+    width: 100%;
+    max-height: 8vh;
+    overflow: hidden;
+    text-shadow: 0px 0px 6px black;
 }
 
 .img-style {
