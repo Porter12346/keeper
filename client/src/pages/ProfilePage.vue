@@ -32,7 +32,7 @@ async function getProfile() {
     try {
         await profilesService.getProfileById(route.params.profileId);
         getProfileKeeps()
-        if (route.params.profileId != identity.value.id) {
+        if (route.params.profileId != identity.value?.id) {
             logger.log("profile")
             await getProfileVaults();
         }

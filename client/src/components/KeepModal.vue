@@ -13,6 +13,7 @@ const router = useRouter()
 const keep = computed(() => AppState.activeKeep)
 const account = computed(() => AppState.account)
 const vaults = computed(() => AppState.accountVaults)
+const vault = computed(()=>AppState.activeVault)
 
 function toProfile() {
     Modal.getOrCreateInstance('#keepModal').hide()
@@ -66,7 +67,7 @@ async function deleteVaultKeep() {
                                 </p>
                             </div>
                             <div class="d-flex justify-content-around align-items-center pb-3">
-                                <div v-if="keep.vaultKeepId && keep.creatorId == account?.id">
+                                <div v-if="keep.vaultKeepId && vaults.find((vaultt)=>vaultt.id == vault.id ) ">
                                     <p @click="deleteVaultKeep()" class="border-bottom mb-0" type="button"><i
                                             class="mdi mdi-cancel"></i> Remove
                                     </p>
