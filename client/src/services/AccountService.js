@@ -5,6 +5,12 @@ import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class AccountService {
+  async editAccountData(editAccountData) {
+      const response = await api.put(`account`, editAccountData)
+      const account = new Account(response.data)
+      AppState.account = account
+      AppState.activeProfile = account
+  }
   async setAccountVaults() {
     await this.getAccountVaults()
     logger.log(AppState.accountVaults)

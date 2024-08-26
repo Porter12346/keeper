@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import AccountInfoForm from '@/components/AccountInfoForm.vue';
 import KeepCard from '@/components/KeepCard.vue';
 import VaultCard from '@/components/VaultCard.vue';
 import { accountService } from '@/services/AccountService.js';
@@ -14,7 +15,7 @@ const profile = computed(() => AppState.activeProfile)
 const vaults = computed(() => AppState.vaults)
 const keeps = computed(() => AppState.keeps)
 const account = computed(() => AppState.account)
-const identity = computed(()=>AppState.identity)
+const identity = computed(() => AppState.identity)
 
 onMounted(() => { getProfile() })
 
@@ -32,6 +33,7 @@ async function getProfile() {
     try {
         await profilesService.getProfileById(route.params.profileId);
         getProfileKeeps()
+        // @ts-ignore
         if (route.params.profileId != identity.value?.id) {
             logger.log("profile")
             await getProfileVaults();
@@ -72,7 +74,10 @@ async function getProfileVaults() {
                 <div class="text-center">
                     <img class="profile-pic" :src="profile.picture" :alt="profile.name">
                 </div>
-                <h1 class="text-center">{{ profile.name }}</h1>
+                <div class="d-flex text-center justify-content-center gap-3">
+                    <h1 class="text-center">{{ profile.name }}</h1>
+                    <i v-if="account?.id == profile.id" data-bs-toggle="modal" data-bs-target="#AccountInfo" type="button" class="mdi mdi-pencil fs-3 text-primary"></i>
+                </div>
                 <p class="text-center">{{ vaults.length }} Vaults | {{ keeps.length }} Keeps</p>
                 <h2>Vaults</h2>
                 <div class="row">
@@ -88,6 +93,9 @@ async function getProfileVaults() {
                 </div>
             </div>
         </div>
+    </div>
+    <div v-if="account">
+    <AccountInfoForm :account="account" />
     </div>
 </template>
 

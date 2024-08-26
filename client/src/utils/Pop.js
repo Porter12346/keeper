@@ -64,7 +64,7 @@ export default class Pop {
         reverseButtons: true,
         confirmButtonColor: 'var(--bs-primary)',
         cancelButtonColor: 'var(--bs-secondary)',
-        color: 'var(--bs-text)',
+        color: 'var(--bs-dark)',
         background: 'var(--bs-page)'
       })
       if (res.isConfirmed) {
@@ -96,7 +96,7 @@ export default class Pop {
       timerProgressBar: progressBar,
       toast: true,
       showConfirmButton: false,
-      color: 'var(--bs-text)',
+      color: 'var(--bs-dark)',
       background: 'var(--bs-page)'
     })
   }

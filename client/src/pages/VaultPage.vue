@@ -17,12 +17,11 @@ onMounted(() => getVault())
 async function getVault() {
     try {
         await vaultsService.getVaultById(route.params.vaultId)
-        if(!vault.value)router.push("Home")
         getVaultKeeps()
     }
     catch (error) {
         Pop.error(error);
-        router.push({name: "Home"})
+        router.push({ name: "Home" })
     }
 
 }
@@ -36,6 +35,16 @@ async function getVaultKeeps() {
     }
 
 }
+
+async function deleteVault() {
+    try {
+        await vaultsService.deleteVault(vault.value.id)
+        router.push({ name: "Home" })
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
 </script>
 
 
@@ -45,10 +54,13 @@ async function getVaultKeeps() {
             <div class="row">
                 <div class="col-2"></div>
                 <div class="col-md-8 col-12 position-relative p-0">
-                    <img class="coverImg" :src="vault.img" :alt="vault.name">
+                    <img class="coverImg rounded" :src="vault.img" :alt="vault.name">
                     <div class="position-absolute positioning">
                         <h1 class="text-center text-light text-shadow">{{ vault.name }}</h1>
                         <p class="text-center text-light text-shadow">By {{ vault.creator.name }}</p>
+                    </div>
+                    <div class="position-absolute positioning2">
+                        <i @click="deleteVault()" class="mdi mdi-close-circle fs-1 text-danger " type="button"></i>
                     </div>
                 </div>
                 <div class="text-center pt-3">
@@ -74,7 +86,7 @@ async function getVaultKeeps() {
     text-shadow: 1px 1px 5px black;
 }
 
-.positioning{
+.positioning {
     width: 100%;
     top: 50%;
 }
@@ -83,10 +95,17 @@ async function getVaultKeeps() {
     columns: 12rem 4;
     column-gap: 1rem;
 }
-.coverImg{
+
+.coverImg {
     width: 100%;
     object-fit: cover;
     object-position: center;
     aspect-ratio: 6/2;
+}
+
+.positioning2 {
+    top: 0%;
+    left: 93%;
+    text-shadow: 0px 0px 8px black;
 }
 </style>

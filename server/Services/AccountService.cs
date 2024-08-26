@@ -35,6 +35,7 @@ public class AccountService
     Account original = GetAccount(accountId);
     original.Name = editData.Name ?? editData.Name;
     original.Picture = editData.Picture ?? editData.Picture;
+    original.coverImg = editData.coverImg ?? editData.coverImg;
     return _repo.Edit(original);
   }
 
