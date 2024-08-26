@@ -5,21 +5,24 @@ import { keepsService } from '@/services/KeepsService.js';
 import { vaultsService } from '@/services/VaultsService.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const vault = computed(() => AppState.activeVault)
 const keeps = computed(() => AppState.keeps)
 const route = useRoute()
+const router = useRouter()
 
 onMounted(() => getVault())
 
 async function getVault() {
     try {
         await vaultsService.getVaultById(route.params.vaultId)
+        if(!vault.value)router.push("Home")
         getVaultKeeps()
     }
     catch (error) {
         Pop.error(error);
+        router.push({name: "Home"})
     }
 
 }

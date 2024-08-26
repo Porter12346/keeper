@@ -5,12 +5,13 @@ import { Keep } from "@/models/Keep.js"
 
 class VaultsService{
     async getVaultById(id) {
+        AppState.keeps = []
+        AppState.activeVault = null
         const response = await api.get(`api/vaults/${id}`)
         const vault = new Vault(response.data)
         AppState.activeVault = vault
     }
     async getVaultKeeps(id) {
-        AppState.keeps = []
         const response = await api.get(`api/vaults/${id}/keeps`)
         const keeps = response.data.map((data)=>new Keep(data))
         AppState.keeps = keeps
