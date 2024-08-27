@@ -18,13 +18,16 @@ public class VaultKeepsRepository
     {
         string sql = @"
         SELECT
-        vaultKeeps.*,
-        keeps.*,
-        accounts.*
-        FROM vaultKeeps
-        JOIN keeps ON keeps.id = vaultKeeps.keepId
-        JOIN accounts ON accounts.id = keeps.creatorId
-        WHERE vaultKeeps.vaultId = @vaultId;";
+        vk.*,
+        k.*,
+        COUNT(vkc.id) AS kept,
+        a.*
+        FROM vaultKeeps vk
+        JOIN keeps k ON k.id = vk.keepId
+        JOIN accounts a ON a.id = k.creatorId
+        LEFT JOIN vaultKeeps vkc ON vkc.keepId = k.id
+        WHERE vk.vaultId = @vaultId
+        GROUP BY vk.id, k.id, a.id ;";
 
         List<VaultedKeep> keeps = _db.Query<VaultKeep, VaultedKeep, Profile, VaultedKeep>(sql, JoinVirtuals, new { vaultId }).ToList();
         return keeps;
