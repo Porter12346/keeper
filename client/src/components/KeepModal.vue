@@ -103,6 +103,8 @@ async function deleteVaultKeep() {
 .profile-pic {
     height: 5vh;
     border-radius: 50%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 
 .img-sizing {

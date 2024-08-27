@@ -3,15 +3,16 @@ import { api } from "./AxiosService.js"
 import { AppState } from "@/AppState.js"
 import { Keep } from "@/models/Keep.js"
 import Pop from "@/utils/Pop.js"
+import { Account } from "@/models/Account.js"
 
 class VaultsService{
     async deleteVault(id) {
         const confirm = await Pop.confirm("Are you sure you want to delete this vault")
         if(!confirm)throw new Error("Canceled");
         api.delete(`api/vaults/${id}`)
-        const index = AppState.vaults.findIndex((vault)=>vault.id = id)
+        const index = AppState.vaults.findIndex((vault)=>vault.id == id)
         AppState.vaults.splice(index, 1)
-        const index2 = AppState.accountVaults.findIndex((vault)=>vault.id = id)
+        const index2 = AppState.accountVaults.findIndex((vault)=>vault.id == id)
         AppState.accountVaults.splice(index, 1)
         Pop.success("Deleted")
     }

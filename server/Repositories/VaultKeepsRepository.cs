@@ -19,18 +19,18 @@ public class VaultKeepsRepository
         string sql = @"
         SELECT
         vaultKeeps.*,
-        accounts.*,
-        keeps.*
+        keeps.*,
+        accounts.*
         FROM vaultKeeps
-        JOIN accounts ON accounts.id = vaultKeeps.creatorId
         JOIN keeps ON keeps.id = vaultKeeps.keepId
+        JOIN accounts ON accounts.id = keeps.creatorId
         WHERE vaultKeeps.vaultId = @vaultId;";
 
-        List<VaultedKeep> keeps = _db.Query<VaultKeep, Profile, VaultedKeep, VaultedKeep>(sql, JoinVirtuals, new { vaultId }).ToList();
+        List<VaultedKeep> keeps = _db.Query<VaultKeep, VaultedKeep, Profile, VaultedKeep>(sql, JoinVirtuals, new { vaultId }).ToList();
         return keeps;
     }
 
-    private VaultedKeep JoinVirtuals(VaultKeep vaultKeep, Profile profile, VaultedKeep vaultedKeep)
+    private VaultedKeep JoinVirtuals(VaultKeep vaultKeep, VaultedKeep vaultedKeep, Profile profile)
     {
         vaultedKeep.VaultKeepId = vaultKeep.Id;
         vaultedKeep.creator = profile;

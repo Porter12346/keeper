@@ -105,6 +105,9 @@ async function getProfileVaults() {
     border-radius: 50%;
     margin-top: -7vh;
     box-shadow: 1px 1px 10px black;
+    width: 10%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
 }
 
 .grid {
