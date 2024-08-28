@@ -33,7 +33,7 @@ img {
 }
 
 .grid {
-  columns: 12rem 4;
+  columns: 11rem 4;
   column-gap: 1rem;
 }
 

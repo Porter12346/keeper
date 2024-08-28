@@ -9,9 +9,9 @@ const theme = ref(loadState('theme') || 'light')
 
 const route = useRoute()
 
-const routeName = computed(()=>route.name)
+const routeName = computed(() => route.name)
 
-const account = computed(()=>AppState.account)
+const account = computed(() => AppState.account)
 
 onMounted(() => {
   document.documentElement.setAttribute('data-bs-theme', theme.value)
@@ -19,25 +19,34 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav class="bg-light px-3 d-flex justify-content-between align-items-center border-bottom mb-md-3 md-0">
-    <div class="d-flex">
-      <div class="dropdown">
-        <button v-if="routeName == 'Home' && account" class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Create
-        </button>
-        <ul class="dropdown-menu p-0">
-          <li><button data-bs-toggle="modal" data-bs-target="#keepForm" class="dropdown-item selectable border-bottom rounded-top py-3">New Keep</button></li>
-          <li><button data-bs-toggle="modal" data-bs-target="#vaultForm" class="dropdown-item selectable border-top rounded-bottom py-3">New Vault</button></li>
-        </ul>
+  <div class="container bg-light">
+    <div class="row">
+      <div class="col-4 d-flex align-items-center">
+        <div class="dropdown">
+          <button v-if="routeName == 'Home' && account" class="btn dropdown-toggle" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Create
+          </button>
+          <ul class="dropdown-menu p-0">
+            <li><button data-bs-toggle="modal" data-bs-target="#keepForm"
+                class="dropdown-item selectable border-bottom rounded-top py-3">New Keep</button></li>
+            <li><button data-bs-toggle="modal" data-bs-target="#vaultForm"
+                class="dropdown-item selectable border-top rounded-bottom py-3">New Vault</button></li>
+          </ul>
+        </div>
       </div>
-    </div>
-    <router-link title="go to home page" class=" text-md-center order-md-1 order-0" :to="{ name: 'Home' }">
+      <div class="col-4 d-flex align-items-center justify-content-center">
+        <router-link title="go to home page" class=" text-md-center order-md-1 order-0" :to="{ name: 'Home' }">
       <img height=" 60" src="../assets/img/logo.png" alt="The Keeper Co." title="The Keeper Co.">
     </router-link>
-    <div class="text-end px-3 order-2">
+      </div>
+      <div class="col-4 d-flex align-items-center justify-content-end">
+        <div class="text-end px-3 order-2">
       <Login />
     </div>
-  </nav>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>

@@ -50,7 +50,7 @@ async function deleteVaultKeep() {
         <div v-if="keep" class="modal-dialog">
 
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header d-md-none">
                     <button type="button" title="close" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
