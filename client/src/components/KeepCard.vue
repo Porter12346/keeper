@@ -62,8 +62,8 @@ async function deleteKeep() {
                 :alt="keepProp.creator.name">
         </div>
         <div v-if="keepProp.creator && showCreator" >
-            <i v-if="account?.id == keepProp.creator.id" @click="deleteKeep()" type="button" style="top: 0%; right: 3%; text-shadow: 0px 0px 8px black;"
-                class="position-absolute mdi mdi-close-circle text-danger"></i>
+            <i v-if="account?.id == keepProp.creator.id" @click="deleteKeep()" role="button" style="top: 0%; right: 3%; text-shadow: 0px 0px 8px black;"
+                class="position-absolute mdi mdi-close-circle text-danger" title="delete"></i>
         </div>
     </div>
 
@@ -83,7 +83,7 @@ async function deleteKeep() {
 }
 
 .positioning {
-    bottom: 0%;
+    bottom: 1%;
     width: 100%;
     max-height: 8vh;
     overflow: hidden;

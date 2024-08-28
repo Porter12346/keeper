@@ -11,6 +11,7 @@ const vault = computed(() => AppState.activeVault)
 const keeps = computed(() => AppState.keeps)
 const route = useRoute()
 const router = useRouter()
+const account = computed(()=>AppState.account)
 
 onMounted(() => getVault())
 
@@ -55,12 +56,12 @@ async function deleteVault() {
                 <div class="col-2"></div>
                 <div class="col-md-8 col-12 position-relative p-0">
                     <img class="coverImg rounded" :src="vault.img" :alt="vault.name">
-                    <div class="position-absolute positioning">
+                    <div class="position-absolute positioning" style="overflow: hidden;">
                         <h1 class="text-center text-light text-shadow">{{ vault.name }}</h1>
                         <p class="text-center text-light text-shadow">By {{ vault.creator.name }}</p>
                     </div>
                     <div class="position-absolute positioning2">
-                        <i @click="deleteVault()" class="mdi mdi-close-circle fs-1 text-danger " type="button"></i>
+                        <i v-if="vault.creator.id == account?.id" @click="deleteVault()" class="mdi mdi-close-circle fs-1 text-danger" title="delete" type="button"></i>
                     </div>
                 </div>
                 <div class="text-center pt-3">
@@ -75,7 +76,7 @@ async function deleteVault() {
         </div>
     </div>
     <div v-else>
-        <h1>Loading <i class="mdi mdi-loading mdi-spin"></i></h1>
+        <h1>Loading <i class="mdi mdi-loading mdi-spin" title="loading"></i></h1>
     </div>
 
 </template>
@@ -100,7 +101,8 @@ async function deleteVault() {
     width: 100%;
     object-fit: cover;
     object-position: center;
-    aspect-ratio: 6/2;
+    min-height: 100px;
+    aspect-ratio: 6/4;
 }
 
 .positioning2 {

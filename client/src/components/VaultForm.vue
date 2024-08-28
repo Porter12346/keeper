@@ -35,7 +35,7 @@ async function createVault() {
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="vaultFormLabel">Add your vault</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" title="close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form @submit.prevent="createVault()">

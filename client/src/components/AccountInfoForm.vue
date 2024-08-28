@@ -21,21 +21,21 @@ async function editAccountData() {
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="AccountInfoLabel">Edit Account</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" title="close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form @submit.prevent="editAccountData()">
                         <div class="mb-3">
                             <label for="nameInput" class="form-label">Name</label>
-                            <input v-model="editableAccountData.name" type="string" class="form-control" id="nameInput">
+                            <input v-model="editableAccountData.name" type="string" class="form-control" id="nameInput" required minlength="1" maxlength="255">
                         </div>
                         <div class="mb-3">
                             <label for="profilePicInput" class="form-label">Profile picture</label>
-                            <input v-model="editableAccountData.picture" type="URL" class="form-control" id="ProfilePicInput">
+                            <input v-model="editableAccountData.picture" type="URL" class="form-control" id="ProfilePicInput" required minlength="1" maxlength="1000">
                         </div>
                         <div class="mb-3">
                             <label for="coverImgInput" class="form-label">cover Img</label>
-                            <input v-model="editableAccountData.coverImg" type="URL" class="form-control" id="coverImgInput">
+                            <input v-model="editableAccountData.coverImg" type="URL" class="form-control" id="coverImgInput" required minlength="1" maxlength="1000">
                         </div>
                         <div class="d-flex justify-content-end gap-3">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

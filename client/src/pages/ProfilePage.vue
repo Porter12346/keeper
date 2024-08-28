@@ -76,7 +76,7 @@ async function getProfileVaults() {
                 </div>
                 <div class="d-flex text-center justify-content-center gap-3">
                     <h1 class="text-center">{{ profile.name }}</h1>
-                    <i v-if="account?.id == profile.id" data-bs-toggle="modal" data-bs-target="#AccountInfo" type="button" class="mdi mdi-pencil fs-3 text-primary"></i>
+                    <i v-if="account?.id == profile.id" data-bs-toggle="modal" data-bs-target="#AccountInfo" title="edit account info" role="button" class="mdi mdi-pencil fs-3 text-primary"></i>
                 </div>
                 <p class="text-center">{{ vaults.length }} Vaults | {{ keeps.length }} Keeps</p>
                 <h2>Vaults</h2>
@@ -105,7 +105,8 @@ async function getProfileVaults() {
     border-radius: 50%;
     margin-top: -7vh;
     box-shadow: 1px 1px 10px black;
-    width: 10%;
+    width: 25vw;
+    max-width: 200px;
     aspect-ratio: 1/1;
     object-fit: cover;
 }

@@ -1,9 +1,17 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import { useRoute } from 'vue-router';
+import { AppState } from '@/AppState.js';
 
 const theme = ref(loadState('theme') || 'light')
+
+const route = useRoute()
+
+const routeName = computed(()=>route.name)
+
+const account = computed(()=>AppState.account)
 
 onMounted(() => {
   document.documentElement.setAttribute('data-bs-theme', theme.value)
@@ -14,7 +22,7 @@ onMounted(() => {
   <nav class="bg-light px-3 d-flex justify-content-between align-items-center border-bottom mb-md-3 md-0">
     <div class="d-flex">
       <div class="dropdown">
-        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <button v-if="routeName == 'Home' && account" class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           Create
         </button>
         <ul class="dropdown-menu p-0">
@@ -23,8 +31,8 @@ onMounted(() => {
         </ul>
       </div>
     </div>
-    <router-link class=" text-md-center order-md-1 order-0" :to="{ name: 'Home' }">
-      <img height=" 60" src="../assets/img/logo.png" alt="The Keeper Co.">
+    <router-link title="go to home page" class=" text-md-center order-md-1 order-0" :to="{ name: 'Home' }">
+      <img height=" 60" src="../assets/img/logo.png" alt="The Keeper Co." title="The Keeper Co.">
     </router-link>
     <div class="text-end px-3 order-2">
       <Login />

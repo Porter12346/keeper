@@ -20,6 +20,8 @@ class ProfilesService{
     }
 
     setProfile(creator) {
+        AppState.keeps =  []
+        AppState.vaults =  []
         AppState.activeProfile = creator
     }
 

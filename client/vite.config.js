@@ -9,7 +9,7 @@ import eslintPlugin from 'vite-plugin-eslint'
 export default defineConfig({
   plugins: [
     vue(),
-    vueDevTools(),
+    // vueDevTools(),
     eslintPlugin({
       overrideConfigFile: 'eslint.config.js',
     }),

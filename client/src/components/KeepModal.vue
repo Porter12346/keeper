@@ -13,7 +13,7 @@ const router = useRouter()
 const keep = computed(() => AppState.activeKeep)
 const account = computed(() => AppState.account)
 const vaults = computed(() => AppState.accountVaults)
-const vault = computed(()=>AppState.activeVault)
+const vault = computed(() => AppState.activeVault)
 
 function toProfile() {
     Modal.getOrCreateInstance('#keepModal').hide()
@@ -46,8 +46,14 @@ async function deleteVaultKeep() {
 
 <template>
     <div class="modal modal-xl fade" id="keepModal" tabindex="-1" aria-labelledby="keepModalLabel" aria-hidden="true">
+
         <div v-if="keep" class="modal-dialog">
+
             <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" title="close" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-12 p-0">
@@ -55,9 +61,10 @@ async function deleteVaultKeep() {
                         </div>
                         <div class="col-lg-6 col-12 p-0 d-flex flex-column justify-content-between px-4">
                             <div>
-                                <p class="fs-4 text-center d-flex justify-content-center gap-4 pb-3 pb-md-0 pt-md-5"><span
-                                        class="mdi mdi-eye">{{ keep.views }}</span><span
-                                        class="mdi mdi-safe-square-outline">{{ keep.kept }}</span></p>
+                                <p class="fs-4 text-center d-flex justify-content-center gap-4 pb-3 pb-md-0 pt-md-5">
+                                    <span class="mdi mdi-eye" title="views">{{ keep.views }}</span><span
+                                        class="mdi mdi-safe-square-outline" title="kept times">{{ keep.kept }}</span>
+                                </p>
                             </div>
                             <div class="pb-5 pb-md-0">
                                 <h1 class="text-center">
@@ -68,7 +75,7 @@ async function deleteVaultKeep() {
                                 </p>
                             </div>
                             <div class="d-flex justify-content-around align-items-center pb-3">
-                                <div v-if="keep.vaultKeepId && vaults.find((vaultt)=>vaultt.id == vault.id ) ">
+                                <div v-if="keep.vaultKeepId && vaults.find((vaultt) => vaultt.id == vault.id)">
                                     <p @click="deleteVaultKeep()" class="border-bottom mb-0" type="button"><i
                                             class="mdi mdi-cancel"></i> Remove
                                     </p>
@@ -86,7 +93,7 @@ async function deleteVaultKeep() {
                                 </div>
                                 <div v-if="keep.creator" class="d-flex align-items-center">
                                     <img @click="toProfile()" type="button" class="profile-pic ms-5 mx-2 pic-shadow"
-                                        :src="keep.creator.picture" :alt="keep.creator.name">
+                                        title="to profile page" :src="keep.creator.picture" :alt="keep.creator.name">
                                     <p class="mb-0 fw-bold">{{ keep.creator.name }}</p>
                                 </div>
                             </div>

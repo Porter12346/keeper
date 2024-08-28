@@ -4,11 +4,16 @@ import { AppState } from "@/AppState.js"
 import { Keep } from "@/models/Keep.js"
 import Pop from "@/utils/Pop.js"
 import { Account } from "@/models/Account.js"
+import { info } from "sass"
 
 class VaultsService{
     async deleteVault(id) {
         const confirm = await Pop.confirm("Are you sure you want to delete this vault")
-        if(!confirm)throw new Error("Canceled");
+        if(!confirm)
+            {
+                Pop.toast("Canceled")
+                return
+            }
         api.delete(`api/vaults/${id}`)
         const index = AppState.vaults.findIndex((vault)=>vault.id == id)
         AppState.vaults.splice(index, 1)
