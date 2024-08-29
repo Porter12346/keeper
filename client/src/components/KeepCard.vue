@@ -52,11 +52,11 @@ async function deleteKeep() {
 
 
 <template>
-    <div class="position-relative">
+    <div class="position-relative marko-one-regular">
         <img class="img-fluid keep-img rounded" :src="keepProp.img" :alt="keepProp.name" @click="openKeep()"
             type="button">
         <div @click="openKeep()" type="button" class="d-flex justify-content-between align-items-center position-absolute positioning">
-            <p  type="button" class="mx-2 mb-4 fs-md-4 fw-bold text-light text-shadow my-3 fs-5 maxWidth">{{ keepProp.name }}</p>
+            <p  type="button" class="mx-2 mb-4 fs-md-4  text-light text-shadow my-3 fs-5 maxWidth">{{ keepProp.name }}</p>
             <img v-if="showCreator && keepProp.creator" @click.stop="openProfile()" type="button"
                 class="profile-pic mx-2 d-md-block d-none shadow" :src="keepProp.creator.picture"
                 :alt="keepProp.creator.name">

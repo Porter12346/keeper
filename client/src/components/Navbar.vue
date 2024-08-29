@@ -19,7 +19,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container bg-light">
+  <div class="container-fluid bg-light pb-2">
     <div class="row">
       <div class="col-4 d-flex align-items-center">
         <div class="dropdown">
