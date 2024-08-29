@@ -45,6 +45,8 @@ public class Startup
     
     services.AddScoped<ProfilesRepository>();
     services.AddScoped<ProfilesService>();
+    services.AddScoped<UploadRepository>();
+    services.AddScoped<UploadService>();
   }
 
   private void ConfigureCors(IServiceCollection services)

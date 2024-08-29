@@ -85,7 +85,7 @@ public class VaultsController : ControllerBase
     }
 
     [HttpGet("{vaultId}/keeps")]
-    
+
     public async Task<ActionResult<List<VaultedKeep>>> GetVaultsKeeps(int vaultId)
     {
         try
