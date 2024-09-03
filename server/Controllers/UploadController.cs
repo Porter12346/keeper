@@ -28,19 +28,35 @@ public class UploadController : ControllerBase
         try
         {
             Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+            string name = parseName(file.FileName, userInfo.Id);
+
+            // TODO integrate sharp
+
             var request = new PutObjectRequest()
             {
                 BucketName = "porteryoungbucket",
-                Key = $"{userInfo.Id?.TrimEnd('/')}/{file.FileName.Substring(0, file.FileName.LastIndexOf('.'))}",
-                InputStream = file.OpenReadStream()
+                Key = name,
+                InputStream = file.OpenReadStream(),
+                ContentType = file.ContentType
             };
             request.Metadata.Add("Content-Type", file.ContentType);
             var response = await _s3Client.PutObjectAsync(request);
-            return Ok($"https://porteryoungbucket.s3.us-west-2.amazonaws.com/{userInfo.Id}/{file.FileName.Substring(0, file.FileName.LastIndexOf('.'))}");
+            return Ok($"https://porteryoungbucket.s3.us-west-2.amazonaws.com/{name}");
         }
         catch (Exception exception)
         {
             return BadRequest(exception.Message);
         }
+    }
+
+    private static string parseName(string source, string userId)
+    {
+        string[] s = source.Split(' ');
+        string n = string.Join("_", s);
+        return $"{userId.TrimEnd('/')}/{n.Substring(0, n.LastIndexOf('.'))}";
+
+        // foreach (int c in source)
+        //     if(source[c] == ' ')source = source.Remove(c, 1);
+        // return source;
     }
 }
