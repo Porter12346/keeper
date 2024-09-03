@@ -31,6 +31,9 @@ public class Startup
     services.AddSingleton<Auth0Provider>();
     services.AddScoped<IDbConnection>(x => CreateDbConnection());
 
+    services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+    services.AddAWSService<IAmazonS3>();
+
     services.AddScoped<AccountsRepository>();
     services.AddScoped<AccountService>();
 
@@ -42,7 +45,7 @@ public class Startup
 
     services.AddScoped<VaultKeepsRepository>();
     services.AddScoped<VaultKeepsService>();
-    
+
     services.AddScoped<ProfilesRepository>();
     services.AddScoped<ProfilesService>();
     services.AddScoped<UploadRepository>();

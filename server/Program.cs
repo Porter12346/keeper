@@ -9,6 +9,9 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.SecurityToken;
 using Amazon.SecurityToken.Model;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace keeper;
 
