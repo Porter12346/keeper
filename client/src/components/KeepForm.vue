@@ -58,7 +58,7 @@ async function uploadImg() {
 <template>
     <div class="modal fade" id="keepForm" tabindex="-1" aria-labelledby="keepFormLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content rounded overflow-hidden">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5 fw-bold text-body-secondary" id="keepFormLabel">Add your keep</h1>
                     <button type="button" class="btn-close" title="close" data-bs-dismiss="modal"

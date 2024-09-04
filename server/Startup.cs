@@ -31,7 +31,15 @@ public class Startup
     services.AddSingleton<Auth0Provider>();
     services.AddScoped<IDbConnection>(x => CreateDbConnection());
 
-    services.AddDefaultAWSOptions(Configuration.GetAWSOptions());
+    var awsOptions = Configuration.GetAWSOptions();
+    // awsOptions.Credentials = new EnvironmentVariablesAWSCredentials();
+    awsOptions.Credentials = new BasicAWSCredentials(
+      Configuration["AWS_ACCESS_KEY_ID"],
+      Configuration["AWS_SECRET_ACCESS_KEY"]
+    );
+    // services.AddDefaultAWSOptions(awsOptions.Credentials);
+
+    services.AddDefaultAWSOptions(awsOptions);
     services.AddAWSService<IAmazonS3>();
 
     services.AddScoped<AccountsRepository>();
