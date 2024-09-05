@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +25,14 @@ public class Startup
     ConfigureCors(services);
     ConfigureAuth(services);
     services.AddControllers();
+    services.Configure<FormOptions>(o=>{
+      var size = 10*1024*1024;
+      o.ValueLengthLimit = size;
+      o.MultipartHeadersLengthLimit = size;
+      o.MultipartBodyLengthLimit = size; 
+      o.MultipartHeadersCountLimit = size;
+      o.MultipartBoundaryLengthLimit = size;
+    });
     services.AddSwaggerGen(c =>
     {
       c.SwaggerDoc("v1", new OpenApiInfo { Title = "keeper", Version = "v1" });
