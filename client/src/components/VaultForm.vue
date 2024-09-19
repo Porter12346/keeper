@@ -1,4 +1,5 @@
 <script setup>
+import { imgUploadService } from '@/services/ImgUploadService.js';
 import { vaultsService } from '@/services/VaultsService.js';
 import Pop from '@/utils/Pop.js';
 import { ref } from 'vue';
@@ -10,8 +11,22 @@ const editableVaultData = ref({
     isPrivate: false
 })
 
+const img = ref(null)
+
+async function selectFile(event) {
+    try {
+        console.log("selecting img")
+        img.value = event.target.files[0]
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+
+}
+
 async function createVault() {
     try {
+        editableVaultData.value.img = await uploadImg()
         await vaultsService.createVault(editableVaultData.value)
         Pop.success("Vault Created")
         editableVaultData.value = ({
@@ -20,6 +35,17 @@ async function createVault() {
             description: '',
             isPrivate: false
         })
+    }
+    catch (error) {
+        Pop.error(error);
+    }
+}
+
+async function uploadImg() {
+    try {
+        console.log("uploading img")
+        const url = await imgUploadService.uploadImg(img.value)
+        return (url)
     }
     catch (error) {
         Pop.error(error);
@@ -44,10 +70,9 @@ async function createVault() {
                                 class="form-control border-0 border-bottom rounded-0" id="vaultFormTitle"
                                 aria-describedby="TitleHelp" required minlength="1" maxlength="255">
                         </div>
-                        <div class="mb-3 pb-5">
-                            <input v-model="editableVaultData.img" placeholder="Image URL..." type="URL"
-                                class="form-control border-0 border-bottom rounded-0" id="vaultFormImageURL" required
-                                minlength="1" maxlength="1000">
+                        <div class="mb-1 pb-2">
+                            <input @change="selectFile" required="true" name="files" class="form-control" type="file" multiple="false"
+                                accept="image/*">
                         </div>
                         <div class="mb-3 pt-5">
                             <textarea v-model="editableVaultData.description" placeholder="Vault Description..."
