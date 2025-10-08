@@ -60,14 +60,14 @@ jobs:
         uses: azure/appservice-settings@v1
         with:
           app-name: 'KeeperPorter'
-          resource-group-name: 'KeeperPorter_group'
           connection-strings-json: >-
             {
             "DefaultConnection": {
-              "value": "${{ secrets.AZURE_CONNECTION_STRING }}",
-              "type": "MySql"
+            "value": "${{ secrets.AZURE_CONNECTION_STRING }}",
+            "type": "MySql"
             }
             }
+
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
