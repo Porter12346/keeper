@@ -64,7 +64,7 @@ jobs:
           connection-strings-json: |
             {
               "DefaultConnection": {
-                "value": "Server=league.mysql.database.azure.com;Port=3306;Database=keeper;Uid=P0rt3r76;Pwd=Y0un9677;SslMode=None;",
+                "value": "${{ secrets.SQL_CONNECTION_STRING }}",
                 "type": "MySql"
               }
             }
