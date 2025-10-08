@@ -59,6 +59,9 @@ jobs:
       - name: Test secret access
         run: echo "${{ secrets.SQL_CONNECTION_STRING }}"
 
+      - name: Set connection string environment variable
+        run: echo "CONN_STR=${{ secrets.SQL_CONNECTION_STRING }}" >> $GITHUB_ENV
+
       - name: Set connection string in Azure App Service
         uses: azure/appservice-settings@v1
         with:
@@ -67,7 +70,7 @@ jobs:
           connection-strings-json: |
             {
               "DefaultConnection": {
-                "value": '${{ secrets.SQL_CONNECTION_STRING }}',
+                "value": "${{ env.CONN_STR }}",
                 "type": "MySql"
               }
             }
