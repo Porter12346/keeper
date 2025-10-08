@@ -25,11 +25,12 @@ public class Startup
     ConfigureCors(services);
     ConfigureAuth(services);
     services.AddControllers();
-    services.Configure<FormOptions>(o=>{
-      var size = 10*1024*1024;
+    services.Configure<FormOptions>(o =>
+    {
+      var size = 10 * 1024 * 1024;
       o.ValueLengthLimit = size;
       o.MultipartHeadersLengthLimit = size;
-      o.MultipartBodyLengthLimit = size; 
+      o.MultipartBodyLengthLimit = size;
       o.MultipartHeadersCountLimit = size;
       o.MultipartBoundaryLengthLimit = size;
     });
@@ -102,7 +103,7 @@ public class Startup
 
   private IDbConnection CreateDbConnection()
   {
-    string connectionString = Configuration["CONNECTION_STRING"];
+    string connectionString = Configuration.GetConnectionString("DefaultConnection");
     return new MySqlConnection(connectionString);
   }
 

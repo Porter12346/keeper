@@ -42,6 +42,7 @@ public class KeepsRepository
 
     internal List<Keep> GetAllKeeps()
     {
+        Console.WriteLine("repo in");
         string sql = @"
         SELECT 
         keeps.*,
@@ -54,6 +55,7 @@ public class KeepsRepository
         ORDER BY keeps.id;";
 
         List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, JoinCreator).ToList();
+        Console.WriteLine("Repo out");
         return keeps;
     }
 

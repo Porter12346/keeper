@@ -1,6 +1,7 @@
 <script setup>
 import { imgUploadService } from '@/services/ImgUploadService.js';
 import { keepsService } from '@/services/KeepsService.js';
+import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { ref } from 'vue';
 
@@ -14,6 +15,7 @@ const editableKeepData = ref({
 const img = ref(null)
 
 
+// @ts-ignore
 async function createKeep() {
     try {
         editableKeepData.value.img = await uploadImg()
@@ -32,7 +34,7 @@ async function createKeep() {
 
 async function selectFile(event) {
     try {
-        console.log("selecting img")
+        logger.log("selecting img")
         img.value = event.target.files[0]
     }
     catch (error) {
@@ -41,10 +43,9 @@ async function selectFile(event) {
 
 }
 
-
 async function uploadImg() {
     try {
-        console.log("uploading img")
+        logger.log("uploading img")
         const url = await imgUploadService.uploadImg(img.value)
         return (url)
     }

@@ -1,3 +1,4 @@
+-- Active: 1756498133405@@league.mysql.database.azure.com@3306
 CREATE TABLE IF NOT EXISTS accounts (
     id VARCHAR(255) NOT NULL primary key COMMENT 'primary key',
     createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
@@ -52,3 +53,5 @@ CREATE TABLE vaultKeeps (
         FROM
         accounts
         WHERE id = '66a2c37fb15908fef1488d03';
+
+CREATE DATABASE keeper;

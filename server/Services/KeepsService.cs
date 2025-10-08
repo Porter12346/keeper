@@ -26,7 +26,9 @@ public class KeepsService
 
     internal List<Keep> GetAllKeeps()
     {
+        Console.WriteLine("Service in");
         List<Keep> keeps = _repo.GetAllKeeps();
+        Console.WriteLine("Service out");
         return keeps;
     }
 

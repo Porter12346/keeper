@@ -1,3 +1,5 @@
+using Amazon.Runtime.Internal.Util;
+
 namespace keeper.Controllers;
 
 [ApiController]
@@ -38,7 +40,9 @@ public class KeepsController : ControllerBase
     {
         try
         {
+            Console.WriteLine("Endpoint hit");
             List<Keep> keeps = _keepsService.GetAllKeeps();
+            Console.WriteLine("Returning");
             return keeps;
         }
         catch (Exception exception)
