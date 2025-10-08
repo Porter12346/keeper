@@ -67,7 +67,7 @@ jobs:
           connection-strings-json: |
             {
               "DefaultConnection": {
-                "value": "${{ env.CONN_STR }}",
+                "value": "${{ secrets.SQL_CONNECTION_STRING }}",
                 "type": "MySql"
               }
             }
