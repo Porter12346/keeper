@@ -56,6 +56,14 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_241A4609E1BC40C291061F3FCB0C23EA }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_81BD094D34894879A24F3A2DA9C4B2F4 }}
 
+
+      - name: Debug connection string (masked)
+        run: |
+          echo "Connection string length: ${#AZURE_CONNECTION_STRING}"
+        env:
+          AZURE_CONNECTION_STRING: ${{ secrets.AZURE_CONNECTION_STRING }}
+
+
       - name: Set connection string in Azure App Service
         uses: azure/appservice-settings@v1
         with:
