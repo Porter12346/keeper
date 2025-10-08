@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: 'KeeperPorter'
           slot-name: 'Production'
-          package: .
+          package: ${{ github.workspace }}/myapp
           
