@@ -67,7 +67,7 @@ jobs:
           connection-strings-json: |
             {
               "DefaultConnection": {
-                "value": "${{ secrets.SQL_CONNECTION_STRING }}",
+                "value": '${{ secrets.SQL_CONNECTION_STRING }}',
                 "type": "MySql"
               }
             }
@@ -79,4 +79,3 @@ jobs:
           app-name: 'KeeperPorter'
           slot-name: 'Production'
           package: ${{ github.workspace }}/myapp
-          
