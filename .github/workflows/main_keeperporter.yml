@@ -39,8 +39,8 @@ jobs:
     runs-on: windows-latest
     needs: build
     permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
+      id-token: write
+      contents: read
 
     steps:
       - name: Download artifact from build job
@@ -48,7 +48,7 @@ jobs:
         with:
           name: myapp
           path: ${{ github.workspace }}/myapp
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -56,23 +56,17 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_241A4609E1BC40C291061F3FCB0C23EA }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_81BD094D34894879A24F3A2DA9C4B2F4 }}
 
-      - name: Test secret access
-        run: echo "${{ secrets.SQL_CONNECTION_STRING }}"
-
-      - name: Set connection string environment variable
-        run: echo "CONN_STR=${{ secrets.SQL_CONNECTION_STRING }}" >> $GITHUB_ENV
-
       - name: Set connection string in Azure App Service
         uses: azure/appservice-settings@v1
         with:
           app-name: 'KeeperPorter'
-          slot-name: 'Production'
-          connection-strings-json: |
+          resource-group-name: 'KeeperPorter_group'
+          connection-strings-json: >-
             {
-              "DefaultConnection": {
-                "value": "${{ env.CONN_STR }}",
-                "type": "MySql"
-              }
+            "DefaultConnection": {
+              "value": "${{ secrets.AZURE_CONNECTION_STRING }}",
+              "type": "MySql"
+            }
             }
 
       - name: Deploy to Azure Web App
