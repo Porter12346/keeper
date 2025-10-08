@@ -27,15 +27,14 @@ _docker-compose.yml_
 version: '3'
 services:
   app:
-    image: your_dockerhub_username/your-repo-name:latest
+    image: porteryoung/keeper:latest
     ports:
       - "7045:80"  # EC2_PORT:CONTAINER_PORT
     environment:
-      - CONNECTION_STRING=
-      - AUTH_DOMAIN=
-      - AUTH_AUDIENCE=
-      - AUTH_CLIENT_ID=
-      - NODE_ENV=
+      - CONNECTION_STRING="Server=league.mysql.database.azure.com;Port=3306;Database=keeper;Uid=P0rt3r76;Pwd=Y0un9677;SslMode=None;"
+      - AUTH_DOMAIN='dev-hhcu2170fadrfsij.us.auth0.com'
+      - AUTH_AUDIENCE='https://PortersAuthTest/'
+      - AUTH_CLIENT_ID='9ky5h2ESpCSBmkWByEuMajyVhAiNBsZN'
 ```
 
 
