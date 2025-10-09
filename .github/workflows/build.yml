@@ -11,8 +11,11 @@ jobs:
     if: contains(github.event.head_commit.message, 'deploy')
 
     steps:
-      - name: Echo ENV_FILE
-        run: echo "${{ secrets.ENV_FILE }}"
+      - name: Debug ENV_FILE
+        run: |
+          echo "$ENV_FILE" > env_file_value.txt
+          cat env_file_value.txt
+
 
       - name: Checkout Repository 👀
         uses: actions/checkout@v4
