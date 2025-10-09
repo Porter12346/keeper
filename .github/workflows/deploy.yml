@@ -24,9 +24,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Echo ENV_FILE
-        run: echo "$ENV_FILE"
-
       - name: SSH KEY 🔑
         run: |
           mkdir -p ~/.ssh

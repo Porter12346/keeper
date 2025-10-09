@@ -11,6 +11,9 @@ jobs:
     if: contains(github.event.head_commit.message, 'deploy')
 
     steps:
+      - name: Echo ENV_FILE
+        run: echo "$ENV_FILE"
+
       - name: Checkout Repository 👀
         uses: actions/checkout@v4
 
