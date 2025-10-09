@@ -21,21 +21,18 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
-      - name: output a portion of the secret
-        env:
-          MY_SECRET: ${{ secrets.ENV_FILE }}
-        run: |
-          echo "echo "MY_SECRET: $MY_SECRET"
-
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Echo ENV_FILE
+        run: echo "$ENV_FILE"
 
       - name: SSH KEY 🔑
         run: |
           mkdir -p ~/.ssh
           echo "$EC2_PEM_KEY" > ~/.ssh/id_rsa.pem
           chmod 600 ~/.ssh/id_rsa.pem
-
+          
       - name: Send Docker Compose 🐋
         run: |
           scp -i ~/.ssh/id_rsa.pem -o StrictHostKeyChecking=no -r server/docker-compose.yml $EC2_USERNAME@$EC2_IP_ADDRESS:~/$REPO_NAME-compose
@@ -48,7 +45,7 @@ jobs:
             sudo docker pull $DOCKER_USERNAME/$REPO_NAME:latest &&
             sudo docker-compose -p $REPO_NAME -f ~/$REPO_NAME-compose up -d
           "
-
+      
       - name: Docker prune 🌳
         run: |
           ssh -i ~/.ssh/id_rsa.pem -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_IP_ADDRESS "
