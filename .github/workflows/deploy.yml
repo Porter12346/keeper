@@ -24,6 +24,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: output a portion of the secret
+        env:
+          MY_SECRET: ${{ secrets.ENV_FILE }}
+        run: |
+          echo "echo "MY_SECRET: $MY_SECRET"
+
       - name: SSH KEY 🔑
         run: |
           mkdir -p ~/.ssh
