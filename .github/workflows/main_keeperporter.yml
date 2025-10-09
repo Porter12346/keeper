@@ -56,6 +56,19 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_241A4609E1BC40C291061F3FCB0C23EA }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_81BD094D34894879A24F3A2DA9C4B2F4 }}
 
+      - name: Set connection string in Azure App Service
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: "KeeperPorter"
+          slot-name: "Production"
+          connection-strings-json: |
+            {
+              "DefaultConnection": {
+                "value": "${{ secrets.SQL_CONNECTION_STRING }}",
+                "type": "MySql"
+              }
+            }
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
