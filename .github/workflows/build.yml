@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Echo ENV_FILE
-        run: echo "$ENV_FILE"
+        run: echo "${{ secrets.ENV_FILE }}"
 
       - name: Checkout Repository 👀
         uses: actions/checkout@v4
